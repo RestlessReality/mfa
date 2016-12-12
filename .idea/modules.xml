@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfa.iml" filepath="$PROJECT_DIR$/.idea/modules/mfa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfa_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mfa_main.iml" group="mfa" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfa_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mfa_test.iml" group="mfa" />
+    </modules>
+  </component>
+</project>
