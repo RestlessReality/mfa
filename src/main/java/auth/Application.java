@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Todo: SpringWebSecurity, PreparedStatements
- * Todo: h2 und sqlite deinstallieren
+ * Todo: sqlite und mysql...deinstallieren..
  *
  * HTTP:
  * GET - sicher, keine Nebeneffekte
@@ -20,7 +20,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * put: arg: user (muss unique sein) [ggf auch: domain/ip prüfen, ob von angemeldeter website],
  * zurück: qr-code (mit bib, (zing?)) und seed base32 - kodiert und backup-code zur deaktivierung
  *
- * checkCode
+ * verify
  * get: arg:user+token+Zeitstempel -
  * zurück: valid+Zeitstempel/notvalid/backupcode (0/1/-1)
  * (der Zeitstempel ist gegen replay-angriffe)
@@ -30,6 +30,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * zurück: valid+Zeitstempel/notvalid
  *
  * Database Setup:
+ * h2 database with test configuration and password "tacmot"
  */
 
 @SpringBootApplication //short for @Configuration @EnableAutoConfiguration @EnableWebMvc @ComponentScan
@@ -41,18 +42,3 @@ public class Application {
 
     }
 }
-
-// WASTE:
-
-// CREATE TABLE ALLOWEDIPS
-//(
-//Ip varchar(255) NOT NULL,
-//PRIMARY KEY (Ip)
-//)
-//
-// INSERT INTO ALLOWEDIPS
-// VALUES ('0:0:0:0:0:0:0:1');
-
- //        statement.execute("CREATE TABLE ALLOWEDIPS ( Ip varchar(255) NOT NULL, PRIMARY KEY (Ip) )");
- //        statement.execute("INSERT INTO ALLOWEDIPS VALUES ('0:0:0:0:0:0:0:1');");
- //        statement.execute("INSERT INTO ALLOWEDIPS VALUES ('testIP');");

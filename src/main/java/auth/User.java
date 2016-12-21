@@ -7,9 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-/**
- *
- */
 @Entity
 @Table(name="Users")
 public class User {
@@ -68,4 +65,14 @@ public class User {
         return backupQrCode;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", providerIP='" + providerIP + '\'' +
+                ", seed=" + seed +
+                ", backupQrCode=" + backupQrCode +
+                '}';
+    }
 }
