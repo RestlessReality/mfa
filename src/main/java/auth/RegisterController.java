@@ -61,16 +61,19 @@ public class RegisterController {
     }
 
     /**
-     *
+     * Method generates token for given user and compares it with the given token.
+     * Checks currentTime for protection against replay-attacs.
      * @param token
      * @param currentTime
-     * @return
+     * @return true, if both values are identical, false otherwise.
      */
     @RequestMapping(value="/verify", method = RequestMethod.GET)
     @ResponseBody
     public boolean verifyToken(HttpServletRequest request, String name, int token, int currentTime){
 
         // ask from ttop token for user
+
+
         // check if valid:
         // check if current token or + or - 30 seconds OR more or less? then ask for another token and check if same delay
         return false;
