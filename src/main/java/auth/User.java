@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.security.SecureRandom;
+import java.util.Random;
 
 @Entity
 @Table(name="Users")
@@ -23,7 +25,7 @@ public class User {
     private String providerIP;
 
     @NotNull
-    private int seed;
+    private byte[] seed;
 
     @NotNull
     private int backupQrCode;
@@ -37,8 +39,15 @@ public class User {
         this.backupQrCode = generateBackupQrCode();
     }
 
-    private int generateSeed() {
-        return 0;
+    /**
+     * Generates a random number
+     * @return
+     */
+    private byte[] generateSeed() {
+        Random randomGenerator = new SecureRandom();
+        byte[] key = new byte[16];
+        randomGenerator.nextBytes(key);
+        return key;
     }
 
     private int generateBackupQrCode() {
@@ -57,7 +66,7 @@ public class User {
         return providerIP;
     }
 
-    public int getSeed() {
+    public byte[] getSeed() {
         return seed;
     }
 

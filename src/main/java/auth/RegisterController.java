@@ -21,7 +21,7 @@ public class RegisterController {
     /**
      * Creates a new user in the DB.
      * @param name Name of the user to create
-     * @return
+     * @return todo: backup-code, seed base32 und qr-code
      */
     @RequestMapping(value="/register", method = RequestMethod.POST)
     @ResponseBody
@@ -86,6 +86,10 @@ public class RegisterController {
     @RequestMapping(value="/delete", method = RequestMethod.POST)
     @ResponseBody
     public boolean deleteUser(HttpServletRequest request, String name){
+
+        // check if valid ip of requester
+        // drop user
+
         return false;
     }
 

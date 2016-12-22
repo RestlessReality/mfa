@@ -10,7 +10,7 @@ import java.math.BigInteger;
 import java.util.TimeZone;
 
 
-    /**
+/**
  Copyright (c) 2011 IETF Trust and the persons identified as
  authors of the code. All rights reserved.
 
@@ -57,7 +57,6 @@ import java.util.TimeZone;
              throw new UndeclaredThrowableException(gse);
          }
      }
-
 
      /**
       * This method converts a HEX string to Byte[]
