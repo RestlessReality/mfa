@@ -21,44 +21,42 @@ public class RegisterController {
     /**
      * Creates a new user in the DB.
      * @param name Name of the user to create
-     * @return todo: backup-code, seed base32 und qr-code
+     * @return todo: backup-code, seed as qr-code
      */
     @RequestMapping(value="/register", method = RequestMethod.POST)
     @ResponseBody
-    public String register(HttpServletRequest request, String name) { //@RequestParam(value="name") String name
-        String userId = "";
+    public User register(HttpServletRequest request, String name) { //@RequestParam(value="name") String name
 
-        if (userAlreadyExisting(request.getRemoteAddr(), name)){
-            return "Username already existing, nothing changed.";
-        }else {
+        User existingUser = userDao.findByName(name);
+        if (existingUser != null) {
+            return existingUser;
+        } else {
 
+            User user = new User(name, request.getRemoteAddr());
             try {
-                User user = new User(name, request.getRemoteAddr());
                 userDao.save(user);
-                userId = String.valueOf(user.getId());
-                System.out.println("This user was created: " + user);
             } catch (Exception ex) {
-                return "Error creating the user: " + ex.toString();
+                System.out.println("Error creating the user: " + ex.toString());
             }
-            return "User succesfully created with id = " + userId;
+            return user;
         }
     }
 
-    /**
-     * Checks if user with this name is already existing.
-     * ToDo: Does not yet support/check for duplicates with different providerIDs
-     * @param providerIP not yet supported
-     * @param name name of the user which shall be searched in the database
-     * @return true, if user already exists in database,false otherwise
-     */
-    private boolean userAlreadyExisting(String providerIP, String name){
-        User user =userDao.findByName(name);
-        if ( user != null) {
-            System.out.println("Name alreadyExisting");
-            return true;
-        }
-        return false;
-    }
+//    /**
+//     * Checks if user with this name is already existing.
+//     * ToDo: Does not yet support/check for duplicates with different providerIDs
+//     * @param providerIP not yet supported
+//     * @param name name of the user which shall be searched in the database
+//     * @return true, if user already exists in database,false otherwise
+//     */
+//    private boolean userAlreadyExisting(String providerIP, String name){
+//        User user =userDao.findByName(name);
+//        if ( user != null) {
+//            System.out.println("Name alreadyExisting");
+//            return true;
+//        }
+//        return false;
+//    }
 
     /**
      * Method generates token for given user and compares it with the given token.

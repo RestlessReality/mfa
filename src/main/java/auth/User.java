@@ -1,5 +1,8 @@
 package auth;
 
+import com.google.common.io.BaseEncoding;
+import org.apache.commons.codec.binary.Hex;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.Random;
 
 @Entity
@@ -25,7 +29,7 @@ public class User {
     private String providerIP;
 
     @NotNull
-    private byte[] seed;
+    private String seed;
 
     @NotNull
     private int backupQrCode;
@@ -40,14 +44,22 @@ public class User {
     }
 
     /**
-     * Generates a random number
-     * @return
+     * Generates a random byte[],
+     * converts it to hex and then encodes it as base32
+     * Used as shared secret key and seed for totp
+     * @return Base32 encoded hex-String of a random seed
      */
-    private byte[] generateSeed() {
+    private String generateSeed() {
         Random randomGenerator = new SecureRandom();
         byte[] key = new byte[16];
         randomGenerator.nextBytes(key);
-        return key;
+        String byteToString = Arrays.toString(key);
+        System.out.println("THE SEED TOSTRING: "+byteToString);
+        String byteAsHex = Hex.encodeHexString(key);
+        System.out.println("THE SEED byteAsHex: "+byteAsHex);
+        String hexAsBase32 = BaseEncoding.base32().encode(byteAsHex.getBytes());
+        System.out.println("THE SEED hexAsBase32: "+hexAsBase32);
+        return hexAsBase32;
     }
 
     private int generateBackupQrCode() {
@@ -66,7 +78,7 @@ public class User {
         return providerIP;
     }
 
-    public byte[] getSeed() {
+    public String getSeed() {
         return seed;
     }
 
